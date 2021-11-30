@@ -26,7 +26,7 @@ class NewVisitorTest(unittest.TestCase):
         
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: buy peacock feathers' for row in rows))
+        self.assertTrue(any(row.text == '1: buy peacock feathers' for row in rows), "The new element does not appear in the table")
         
         self.fail('End test!')
         
