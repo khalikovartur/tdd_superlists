@@ -19,17 +19,20 @@ class NewVisitorTest(unittest.TestCase):
         
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
-        
         inputbox.send_keys('buy peacock feathers')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(2)
+        
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('make a spot')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(2)
+        
         
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(any(row.text == '1: buy peacock feathers' for row in rows), "The new element does not appear in the table")
-        
-        self.fail('End test!')
-        
+        self.assertIn('1: buy peacock feathers', [row.text for row in rows])
+        self.assertIn('2: make a spot', [row.text for row in rows])
         
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
